@@ -3,13 +3,13 @@
 
 int main()
 {
-
-	std::cout << "Hello World!" << std::endl;
-
 	University university;
 	Student student;
-	university.RegisterStudent(student);
 
-	//system("pause");
+	while (university.IsAppRunning())
+	{
+		university.RegisterStudent(student);
+	}
+
 	return 0;
 }

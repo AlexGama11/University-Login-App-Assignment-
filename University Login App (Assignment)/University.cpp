@@ -7,48 +7,32 @@ void University::RegisterStudent(Student& student)
 	std::cout << "Would you like to Register or Login?" << std::endl;
 	std::cin >> answer;
 
-	std::cin.get();
-	while (std::cin.fail())
-	{
-		std::cout << "Please write a valid answer!" << std::endl;
-		std::cin.clear();
-		std::cin.ignore(256, '\n');
-		std::cin >> answer;
-	}
-
-	//For Loop to convert each character to uppercase, making my check later be case insensitive.
-	for (int i = 0; i < answer.size(); i++) 
-	{
-		answer.at(i) = toupper(answer.at(i));
-	}
+	Check();
 
 	if (answer == "REGISTER")
 	{
 		std::cout << "What's your Name?" << std::endl;
 		std::getline(std::cin, name);
 		//std::cin >> name;
-		student.SetName(name);
 
 		std::cout << "What's your Student ID?" << std::endl;
 		std::cin >> id;
-		int idNumber = std::stoi(id);
-		student.SetId(idNumber);
 
 		std::cout << "What's your Address?" << std::endl;
 		std::cin.ignore();
 		std::getline(std::cin, address);
 		//std::cin >> address;
-		student.SetAddress(address);
 
 		std::cout << "Choose your Username!" << std::endl;
 		std::cin >> username;
-		student.SetUsername(username);
 
 		std::cout << "Finally, set your password!" << std::endl;
 		std::cin >> password;
-		student.SetPassword(password);
 
-		SaveStudentInfo(name, address, id, username, password);
+		records.SaveStudentInfo(name, address, id, username, password);
+
+		std::cout << "Thank you, you are now registered!" << std::endl;
+		MainScreen();
 	}
 
 	else if (answer == "LOGIN")
@@ -59,100 +43,136 @@ void University::RegisterStudent(Student& student)
 		std::cout << "What's your Username?" << std::endl;
 		std::cin >> username;
 
-		LoadStudentInfo(id, username);
 
-		if (id == idVar && username == usernameVar)
+
+		records.LoadStudentInfo(id, username);
+
+		if (records.CheckID(id) && records.CheckUsername(username))
 		{
 			std::cout << "Please, input your password!" << std::endl;
 			std::cin >> password;
 
-			if (password == passwordVar)
+			if (records.CheckPassword(password))
 			{
-				std::cout << "Login Successful!" << std::endl;
+				std::cout << "Login Successful! Welcome " << username << "!" << std::endl;
+				MainScreen();
 			}
 
 			else
 			{
 				std::cout << "Wrong Password, Login Unsuccessful!" << std::endl;
+
+				std::cout << "\x1B[2J\x1B[H";
 			}
 		}
-
 
 	}
 
 	else
 	{
 		std::cout << "Please write either 'Register' or 'Login'!" << std::endl;
+
+		std::cout << "\x1B[2J\x1B[H";
+	}
+}
+
+void University::MainScreen()
+{
+	student.UniStudent();
+
+	std::cout << "Would you like to attend a Lecture or finish your school year?" << std::endl;
+	std::cin >> answer;
+
+	Check();
+
+	if (answer == "ATTEND" || answer == "LECTURE")
+	{
+		Lecture();
+	}
+
+	else if (answer == "FINISH" || answer == "QUIT")
+	{
+		std::cout << "Are you sure? Quitting will make you lose all your credits!" << std::endl;
+		std::cin >> answer;
+
+		Check();
+
+		if (answer == "Y" || answer == "YES")
+		{
+			std::cout << "Your Total Credits are:" << std::endl;
+			std::cout << "Advanced C++ Programming: " << student.GetCreditsOne() << std::endl;
+			std::cout << "Graphics And Shader Programming:" << student.GetCreditsTwo() << std::endl;
+			std::cout << "Game Engine Development: " << student.GetCreditsThree() << std::endl;
+			std::cout << "Augmented Toy Development: " << student.GetCreditsFour() << std::endl;
+
+			isAppRunning = false;
+		}
+
+		else if (answer == "N" || answer == "NO")
+		{
+			std::cout << "Going back to the main screen!" << std::endl;
+		}
 	}
 }
 
 
 void University::Lecture()
 {
-}
+	std::cout << "Choose which module to learn from!" << std::endl;
 
-void University::SaveStudentInfo(std::string name, std::string address, std::string ID, std::string username, std::string password)
-{
-	std::string save = "Name: " + name + "\n" + "Address: " + address + "\n" + "ID: " + ID + "\n" + "Username: " + username + "\n" + "Password: " + password;
-	std::string fileName = ID + " - " + username;
+	std::cout << "AdvancedCPPProgramming = 1, GraphicsAndShaderProgramming = 2, GameEngineDevelopment = 3, AugmentedToyDevelopment = 4" << std::endl;
 
-	std::string filePath = "../SavedInfo/" + fileName + ".txt";
+	std::cin >> answerInt;
 
-	std::ofstream saveFile(filePath);
-
-	saveFile << save;
-
-	saveFile.close();
-}
-
-void University::LoadStudentInfo(std::string ID, std::string username)
-{
-	std::string fileName = ID + " - " + username;
-
-	std::string filePath = "../SavedInfo/" + fileName + ".txt";
-
-	std::ifstream saveFile(filePath);
-
-	if (!saveFile)
-	{
-		std::cout << "We don't have you on the records, please register or contact an admin!" << std::endl;
-	}
-
-	else
+	switch (Modules(answerInt))
 	{
 
-		for (int i = 0; i < 6; i++)
-		{
-			std::getline(saveFile, output);
+		case Modules::AdvancedCPPProgramming:
 
-			if (i == 1)
-			{
-				//code to read from a certain character onwards.
-				nameVar = output.substr(6);
-			}
+			student.Learn(1);
+			break;
 
-			if (i == 2)
-			{
-				addressVar = output.substr(9);
-			}
+		case Modules::GraphicsAndShaderProgramming:
 
-			if (i == 3)
-			{
-				idVar = output.substr(5);
-			}
+			student.Learn(2);
+			break;
 
-			if (i == 4)
-			{
-				usernameVar = output.substr(10);
-			}
+		case Modules::GameEngineDevelopment:
 
-			if (i == 5)
-			{
-				passwordVar = output.substr(10);
-			}
+			student.Learn(3);
+			break;
 
-		}
+		case Modules::AugmentedToyDevelopment:
+
+			student.Learn(4);
+			break;
+
+		default:
+
+			std::cout << "It seems you are not registered for that module, please choose a valid module!" << std::endl;
+			break;
+	}
+}
+
+bool University::IsAppRunning()
+{
+	return isAppRunning;
+}
+
+void University::Check()
+{
+	std::cin.get();
+	while (std::cin.fail())
+	{
+		std::cout << "Please write a valid answer!" << std::endl;
+		std::cin.clear();
+		std::cin.ignore(256, '\n');
+		std::cin >> answer;
 	}
 
-	saveFile.close();
+	//For Loop to convert each character to uppercase, making my check later be case insensitive.
+	for (int i = 0; i < answer.size(); i++)
+	{
+		answer.at(i) = toupper(answer.at(i));
+	}
 }

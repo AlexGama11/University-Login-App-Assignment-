@@ -1,5 +1,6 @@
 #pragma once
 #include "Student.h"
+#include "Records.h"
 
 class University
 {
@@ -11,16 +12,10 @@ private:
 	std::string username;
 	std::string password;
 
-	std::string idVar;
-	std::string usernameVar;
-	std::string nameVar;
-	std::string addressVar;
-	std::string passwordVar;
-
-	std::string output;
-
 	std::string answer;
 	int answerInt;
+
+	bool isAppRunning = true;
 
 	enum class Modules
 	{
@@ -30,17 +25,20 @@ private:
 		AugmentedToyDevelopment
 	};
 
-
+	Student student;
+	Records records;
 
 public:
 
 	void RegisterStudent(Student& UniStudent);
 
+	void MainScreen();
+
 	void Lecture();
 
-	void SaveStudentInfo(std::string name, std::string address, std::string id, std::string username, std::string password);
+	bool IsAppRunning();
 
-	void LoadStudentInfo(std::string id, std::string username);
+	void Check();
 
 };
 

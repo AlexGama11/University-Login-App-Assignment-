@@ -1,50 +1,34 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "Records.h"
 
 class Student
 {
 
 private:
 
-	int credits;
+	int studentCredits[4] = {0, 0, 0, 0};
 
-	struct ID
-	{
-		int number;
-		std::string name;
-		std::string address;
-		std::string password;
-		std::string username;
-	};
+	std::string studentName;
+	std::string studentAddress;
+	std::string studentID;
+	std::string studentUsername;
+	std::string studentPassword;
 
-	ID id;
+	Records records;
 
 public:
-	int UniStudent(ID id);
+	int UniStudent();
 
-	void GetID(int studentID);
+	void Learn(int moduleNumber);
 
-	void SetId(int& studentID);
+	int GetCreditsOne();
 
-	void GetName(std::string studentName);
+	int GetCreditsTwo();
 
-	void SetName(std::string& studentName);
+	int GetCreditsThree();
 
-	void GetAddress(std::string studentAddress);
-
-	void SetAddress(std::string& studentAddress);
-
-	void GetPassword(std::string studentPassword);
-
-	void SetPassword(std::string& studentPassword);
-
-	void GetUsername(std::string studentUsername);
-
-	void SetUsername(std::string& studentUsername);
-
-	void Learn();
-
-
+	int GetCreditsFour();
 };
 

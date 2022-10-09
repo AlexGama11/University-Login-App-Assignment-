@@ -37,27 +37,27 @@ void Records::LoadStudentInfo(std::string id, std::string username)
 			if (i == 0)
 			{
 				//code to read from a certain character onwards.
-				SetVar(nameVar, 6);
+				SetVar(studentInfo[0], 6);
 			}
 
 			else if (i == 1)
 			{
-				SetVar(addressVar, 9);
+				SetVar(studentInfo[1], 9);
 			}
 
 			else if (i == 2)
 			{
-				SetVar(idVar, 4);
+				SetVar(studentInfo[2], 4);
 			}
 
 			else if (i == 3)
 			{
-				SetVar(usernameVar, 10);
+				SetVar(studentInfo[3], 10);
 			}
 
 			else if (i == 4)
 			{
-				SetVar(passwordVar, 10);
+				SetVar(studentInfo[4], 10);
 			}
 
 		}
@@ -68,7 +68,7 @@ void Records::LoadStudentInfo(std::string id, std::string username)
 
 bool Records::CheckID(std::string id)
 {
-	if (id == idVar)
+	if (id == studentInfo[2])
 	{
 		return true;
 	}
@@ -81,7 +81,7 @@ bool Records::CheckID(std::string id)
 
 bool Records::CheckUsername(std::string username)
 {
-	if (username == usernameVar)
+	if (username == studentInfo[3])
 	{
 		return true;
 	}
@@ -94,7 +94,7 @@ bool Records::CheckUsername(std::string username)
 
 bool Records::CheckPassword(std::string password)
 {
-	if (password == passwordVar)
+	if (password == studentInfo[4])
 	{
 		return true;
 	}
@@ -107,22 +107,22 @@ bool Records::CheckPassword(std::string password)
 
 const std::string Records::GetID()
 {
-	return idVar;
+	return studentInfo[2];
 }
 
 const std::string Records::GetUsername()
 {
-	return usernameVar;
+	return studentInfo[3];
 }
 
 const std::string Records::GetName()
 {
-	return nameVar;
+	return studentInfo[0];
 }
 
 const std::string Records::GetAddress()
 {
-	return addressVar;
+	return studentInfo[1];
 }
 
 void Records::SetVar(std::string& var, int readFrom)

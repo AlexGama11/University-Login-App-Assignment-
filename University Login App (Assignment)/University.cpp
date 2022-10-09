@@ -152,6 +152,8 @@ void University::Lecture()
 			std::cout << "It seems you are not registered for that module, please choose a valid module!" << std::endl;
 			break;
 	}
+
+	MainScreen();
 }
 
 bool University::IsAppRunning()

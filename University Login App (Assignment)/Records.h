@@ -18,6 +18,8 @@ private:
 	std::string output;
 	std::string* varPointer;
 
+	std::string studentInfo[5] = { nameVar, addressVar, idVar, usernameVar, passwordVar };
+
 public:
 
 	void SaveStudentInfo(std::string name, std::string address, std::string id, std::string username, std::string password);

@@ -1,15 +1,11 @@
 #include <iostream>
-#include "University.h"
+#include "App.h"
 
 int main()
 {
-	University university;
-	Student student;
+	App app;
 
-	while (university.IsAppRunning())
-	{
-		university.RegisterStudent(student);
-	}
+	app.AppRun();
 
 	return 0;
 }

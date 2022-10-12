@@ -2,7 +2,13 @@
 #include <fstream>
 
 
-void University::RegisterStudent(Student& student)
+void University::StartSchoolYear()
+{
+	std::cout << "Welcome to London Met!" << std::endl;
+	LoginSystem();
+}
+
+void University::LoginSystem()
 {
 	std::cout << "Would you like to Register or Login?" << std::endl;
 	std::cin >> answer;
@@ -16,7 +22,7 @@ void University::RegisterStudent(Student& student)
 		//std::cin >> name;
 
 		std::cout << "What's your Student ID?" << std::endl;
-		std::cin >> id;
+		std::getline(std::cin, id);
 
 		std::cout << "What's your Address?" << std::endl;
 		std::cin.ignore();
@@ -24,45 +30,42 @@ void University::RegisterStudent(Student& student)
 		//std::cin >> address;
 
 		std::cout << "Choose your Username!" << std::endl;
-		std::cin >> username;
+		std::getline(std::cin, username);
 
 		std::cout << "Finally, set your password!" << std::endl;
-		std::cin >> password;
+		std::getline(std::cin, password);
 
-		records.SaveStudentInfo(name, address, id, username, password);
+		SaveStudentInfo(name, address, id, username, password);
 
 		std::cout << "Thank you, you are now registered!" << std::endl;
-		MainScreen();
 	}
 
 	else if (answer == "LOGIN")
 	{
 		std::cout << "What's your Student ID?" << std::endl;
-		std::cin >> id;
+		std::cin >> loginID;
 
 		std::cout << "What's your Username?" << std::endl;
-		std::cin >> username;
+		std::cin >> loginUsername;
 
 
 
-		records.LoadStudentInfo(id, username);
+		LoadStudentInfo(loginID, loginUsername);
 
-		if (records.CheckID(id) && records.CheckUsername(username))
+		if (CheckID(loginID) && CheckUsername(loginUsername))
 		{
 			std::cout << "Please, input your password!" << std::endl;
-			std::cin >> password;
+			std::cin >> loginPassword;
 
-			if (records.CheckPassword(password))
+			if (CheckPassword(loginPassword))
 			{
-				std::cout << "Login Successful! Welcome " << username << "!" << std::endl;
-				MainScreen();
+				std::cout << "Login Successful! Welcome " << loginUsername << "!" << std::endl;
 			}
 
 			else
 			{
 				std::cout << "Wrong Password, Login Unsuccessful!" << std::endl;
-
-				std::cout << "\x1B[2J\x1B[H";
+				LoginSystem();
 			}
 		}
 
@@ -71,47 +74,7 @@ void University::RegisterStudent(Student& student)
 	else
 	{
 		std::cout << "Please write either 'Register' or 'Login'!" << std::endl;
-
-		std::cout << "\x1B[2J\x1B[H";
-	}
-}
-
-void University::MainScreen()
-{
-	student.UniStudent();
-
-	std::cout << "Would you like to attend a Lecture or finish your school year?" << std::endl;
-	std::cin >> answer;
-
-	Check();
-
-	if (answer == "ATTEND" || answer == "LECTURE")
-	{
-		Lecture();
-	}
-
-	else if (answer == "FINISH" || answer == "QUIT")
-	{
-		std::cout << "Are you sure? Quitting will make you lose all your credits!" << std::endl;
-		std::cin >> answer;
-
-		Check();
-
-		if (answer == "Y" || answer == "YES")
-		{
-			std::cout << "Your Total Credits are:" << std::endl;
-			std::cout << "Advanced C++ Programming: " << student.GetCreditsOne() << std::endl;
-			std::cout << "Graphics And Shader Programming:" << student.GetCreditsTwo() << std::endl;
-			std::cout << "Game Engine Development: " << student.GetCreditsThree() << std::endl;
-			std::cout << "Augmented Toy Development: " << student.GetCreditsFour() << std::endl;
-
-			isAppRunning = false;
-		}
-
-		else if (answer == "N" || answer == "NO")
-		{
-			std::cout << "Going back to the main screen!" << std::endl;
-		}
+		LoginSystem();
 	}
 }
 
@@ -152,13 +115,6 @@ void University::Lecture()
 			std::cout << "It seems you are not registered for that module, please choose a valid module!" << std::endl;
 			break;
 	}
-
-	MainScreen();
-}
-
-bool University::IsAppRunning()
-{
-	return isAppRunning;
 }
 
 void University::Check()
@@ -177,4 +133,137 @@ void University::Check()
 	{
 		answer.at(i) = toupper(answer.at(i));
 	}
+}
+
+void University::SaveStudentInfo(const std::string& name, const std::string address, const std::string id, const std::string username, const std::string password)
+{
+	auto save = "Name: " + name + "\n" + "Address: " + address + "\n" + "ID: " + id + "\n" + "Username: " + username + "\n" + "Password: " + password;
+	auto fileName = id + " - " + username;
+
+	const int maxLines = 5;
+	for (int line = 0; line < maxLines; line++)
+	{
+		if (line == 0)
+		{
+			//Set Student variable in the student class.
+			student.SetStudentVars(name, line);
+		}
+
+		else if (line == 1)
+		{
+			student.SetStudentVars(address, line);
+		}
+
+		else if (line == 2)
+		{
+			student.SetStudentVars(id, line);
+		}
+
+		else if (line == 3)
+		{
+			student.SetStudentVars(username, line);
+		}
+
+		else if (line == 4)
+		{
+			student.SetStudentVars(password, line);
+		}
+
+		else
+		{
+			std::cout << "Error! Forloop is not working!" << std::endl;
+		}
+	}
+
+	std::string filePath = "../SavedInfo/" + fileName + ".txt";
+
+	std::ofstream saveFile(filePath);
+
+	saveFile << save;
+
+	saveFile.close();
+}
+
+void University::LoadStudentInfo(const std::string& userID, const std::string& userUsername)
+{
+	std::string fileName = userID + " - " + userUsername;
+
+	std::string filePath = "../SavedInfo/" + fileName + ".txt";
+
+	std::ifstream saveFile(filePath);
+
+	if (!saveFile)
+	{
+		std::cout << "We don't have you on the records, please register or contact an admin!" << std::endl;
+		app.Quit();
+	}
+
+	else
+	{
+		const int maxLines = 5;
+		for (int line = 0; line < maxLines; line++)
+		{
+			std::getline(saveFile, output);
+
+			if (line == 0)
+			{
+				//code to read from a certain character onwards.
+				SetVar(name, 6, line);
+			}
+
+			else if (line == 1)
+			{
+				SetVar(address, 9, line);
+			}
+
+			else if (line == 2)
+			{
+				SetVar(id, 4, line);
+			}
+
+			else if (line == 3)
+			{
+				SetVar(username, 10, line);
+			}
+			
+			else if (line == 4)
+			{
+				SetVar(password, 10, line);
+			}
+
+			else
+			{
+				std::cout << "Error! Forloop is not working!" << std::endl;
+			}
+
+		}
+	}
+
+	saveFile.close();
+}
+
+void University::SetVar(std::string& var, int readFrom, int line)
+{
+	var = output.substr(readFrom);
+	student.SetStudentVars(var, line);
+}
+
+bool University::CheckID(const std::string& checkID)
+{
+	return (checkID == id);
+}
+
+bool University::CheckUsername(const std::string& checkUsername)
+{
+	return (checkUsername == username);
+}
+
+bool University::CheckPassword(const std::string& checkPassword)
+{
+	return (checkPassword == password);
+}
+
+Student University::GetStudent()
+{
+	return student;
 }

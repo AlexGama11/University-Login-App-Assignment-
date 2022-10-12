@@ -1,34 +1,42 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include "Records.h"
 
 class Student
 {
 
 private:
 
-	int studentCredits[4] = {0, 0, 0, 0};
+	// Goes by module order, to find which credit is for which module do modulenumber - 1.
+	float studentCredits[4] = {0, 0, 0, 0};
 
-	std::string studentName;
-	std::string studentAddress;
-	std::string studentID;
-	std::string studentUsername;
-	std::string studentPassword;
+	enum class LineNumber
+	{
+		FirstLine,
+		SecondLine,
+		ThirdLine,
+		FourthLine,
+		FifthLine
+	};
 
-	Records records;
+	struct StudentInfo
+	{
+		std::string studentName;
+		std::string studentAddress;
+		std::string studentID;
+		std::string studentUsername;
+		std::string studentPassword;
+	};
+
+	StudentInfo info;
 
 public:
 	int UniStudent();
 
 	void Learn(int moduleNumber);
 
-	int GetCreditsOne();
+	void SetStudentVars(const std::string& var, int whatLine);
 
-	int GetCreditsTwo();
-
-	int GetCreditsThree();
-
-	int GetCreditsFour();
+	void TotalCredits();
 };
 

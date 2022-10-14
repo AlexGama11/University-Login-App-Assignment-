@@ -13,7 +13,7 @@ void University::LoginSystem()
 	std::cout << "Would you like to Register or Login?" << std::endl;
 	std::cin >> answer;
 
-	Check();
+	Check(answer);
 
 	if (answer == "REGISTER")
 	{
@@ -47,8 +47,6 @@ void University::LoginSystem()
 
 		std::cout << "What's your Username?" << std::endl;
 		std::cin >> loginUsername;
-
-
 
 		LoadStudentInfo(loginID, loginUsername);
 
@@ -117,7 +115,7 @@ void University::Lecture()
 	}
 }
 
-void University::Check()
+void University::Check(std::string& answerCheck)
 {
 	std::cin.get();
 	while (std::cin.fail())
@@ -125,17 +123,17 @@ void University::Check()
 		std::cout << "Please write a valid answer!" << std::endl;
 		std::cin.clear();
 		std::cin.ignore(256, '\n');
-		std::cin >> answer;
+		std::cin >> answerCheck;
 	}
 
 	//For Loop to convert each character to uppercase, making my check later be case insensitive.
-	for (int i = 0; i < answer.size(); i++)
+	for (int i = 0; i < answerCheck.size(); i++)
 	{
-		answer.at(i) = toupper(answer.at(i));
+		answerCheck.at(i) = toupper(answerCheck.at(i));
 	}
 }
 
-void University::SaveStudentInfo(const std::string& name, const std::string address, const std::string id, const std::string username, const std::string password)
+void University::SaveStudentInfo(const std::string& name, const std::string& address, const std::string& id, const std::string& username, const std::string& password)
 {
 	auto save = "Name: " + name + "\n" + "Address: " + address + "\n" + "ID: " + id + "\n" + "Username: " + username + "\n" + "Password: " + password;
 	auto fileName = id + " - " + username;
@@ -195,7 +193,6 @@ void University::LoadStudentInfo(const std::string& userID, const std::string& u
 	if (!saveFile)
 	{
 		std::cout << "We don't have you on the records, please register or contact an admin!" << std::endl;
-		app.Quit();
 	}
 
 	else

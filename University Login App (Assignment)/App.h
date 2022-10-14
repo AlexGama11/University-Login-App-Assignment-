@@ -1,27 +1,24 @@
 #pragma once
-#include "Student.h"
+#include <string>
 #include "University.h"
 
 class App
 {
-
-public:
-
-	void MainScreen();
-
-	void AppRun();
-
-	bool Quit();
-
-
-
 private:
 
 	University uni;
 
 	bool isUniOpen{ true };
 
-	std::string answer;
+	std::string appAnswer;
+
+public:
+
+	void MainScreen();
+
+	int AppRun();
+
+	void Quit();
 
 };
 

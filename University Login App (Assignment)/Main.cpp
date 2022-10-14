@@ -6,6 +6,4 @@ int main()
 	App app;
 
 	app.AppRun();
-
-	return 0;
 }

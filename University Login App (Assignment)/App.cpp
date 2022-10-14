@@ -5,38 +5,38 @@ void App::MainScreen()
 	uni.GetStudent().UniStudent();
 
 	std::cout << "\nWould you like to attend a Lecture or finish your school year?" << std::endl;
-	std::cin >> answer;
+	std::cin.clear();
+	std::cin >> appAnswer;
 
-	uni.Check();
+	uni.Check(appAnswer);
 
-	if (answer == "ATTEND" || answer == "LECTURE")
+	if (appAnswer == "ATTEND" || appAnswer == "LECTURE")
 	{
 		uni.Lecture();
 	}
 
-	else if (answer == "FINISH" || answer == "QUIT")
+	else if (appAnswer == "FINISH" || appAnswer == "QUIT")
 	{
 		std::cout << "Are you sure? Quitting will make you lose all your credits!" << std::endl;
-		std::cin >> answer;
+		std::cin >> appAnswer;
 
-		uni.Check();
+		uni.Check(appAnswer);
 
-		if (answer == "Y" || answer == "YES")
+		if (appAnswer == "Y" || appAnswer == "YES")
 		{
 			std::cout << "\n" << std::endl;
 			uni.GetStudent().TotalCredits();
-
+			Quit();
 		}
 
-		else if (answer == "N" || answer == "NO")
+		else if (appAnswer == "N" || appAnswer == "NO")
 		{
 			std::cout << "Going back to the main screen!" << std::endl;
-			isUniOpen = false;
 		}
 	}
 }
 
-void App::AppRun()
+int App::AppRun()
 {
 	uni.StartSchoolYear();
 
@@ -44,10 +44,11 @@ void App::AppRun()
 	{
 		MainScreen();
 	}
+
+	return 0;
 }
 
-bool App::Quit()
+void App::Quit()
 {
-	isUniOpen = false ;
-	return isUniOpen;
+	isUniOpen = false;
 }

@@ -1,9 +1,7 @@
 #pragma once
 #include <string>
 #include <fstream>
-
 #include "Student.h"
-#include "App.h"
 
 class University
 {
@@ -33,8 +31,6 @@ private:
 
 	Student student;
 
-	App app;
-
 	std::string output;
 
 public:
@@ -45,9 +41,9 @@ public:
 
 	void Lecture();
 
-	void Check();
+	void Check(std::string& answerCheck);
 
-	void SaveStudentInfo(const std::string& name, const std::string address, const std::string id, const std::string username, const std::string password);
+	void SaveStudentInfo(const std::string& name, const std::string& address, const std::string& id, const std::string& username, const std::string& password);
 
 	void LoadStudentInfo(const std::string& userID, const std::string& userUsername);
 

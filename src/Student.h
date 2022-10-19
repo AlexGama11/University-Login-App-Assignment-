@@ -1,14 +1,16 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <vector>
 
 class Student
 {
 
-private:
+protected:
 
 	// Goes by module order, to find which credit is for which module do modulenumber - 1.
-	float studentCredits[4] = {0, 0, 0, 0};
+	int totalModules;
+	std::vector<float> studentCredits[14];
 
 	enum class LineNumber
 	{
@@ -16,7 +18,8 @@ private:
 		SecondLine,
 		ThirdLine,
 		FourthLine,
-		FifthLine
+		FifthLine,
+		SixthLine
 	};
 
 	struct StudentInfo
@@ -26,17 +29,19 @@ private:
 		std::string studentID;
 		std::string studentUsername;
 		std::string studentPassword;
+		std::string studentDegree;
 	};
 
 	StudentInfo info;
 
 public:
+
 	int UniStudent();
 
-	void Learn(int moduleNumber);
+	virtual void Learn(int moduleNumber) = 0;
 
 	void SetStudentVars(const std::string& var, int whatLine);
 
-	void TotalCredits();
+	virtual void TotalCredits() = 0;
 };
 

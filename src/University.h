@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include "Student.h"
+#include "StudentTypes.h"
 
 class University
 {
@@ -13,6 +14,7 @@ private:
 	std::string id;
 	std::string username;
 	std::string password;
+	std::string courseType;
 	
 	std::string loginID;
 	std::string loginUsername;
@@ -21,29 +23,23 @@ private:
 	std::string answer;
 	int answerInt;
 
-	enum class Modules
-	{
-		AdvancedCPPProgramming = 1,
-		GraphicsAndShaderProgramming,
-		GameEngineDevelopment,
-		AugmentedToyDevelopment
-	};
-
-	Student student;
-
 	std::string output;
+
+	Student* student{ nullptr };
 
 public:
 
 	void StartSchoolYear();
 
 	void LoginSystem();
+	
+	Student* DefineStudentType(const std::string& degree);
 
 	void Lecture();
 
 	void Check(std::string& answerCheck);
 
-	void SaveStudentInfo(const std::string& name, const std::string& address, const std::string& id, const std::string& username, const std::string& password);
+	void SaveStudentInfo(const std::string& name, const std::string& address, const std::string& id, const std::string& username, const std::string& password, const std::string& degree);
 
 	void LoadStudentInfo(const std::string& userID, const std::string& userUsername);
 
@@ -55,7 +51,7 @@ public:
 
 	bool CheckPassword(const std::string& checkPassword);
 
-	Student GetStudent();
+	Student* GetStudent();
 
 };
 

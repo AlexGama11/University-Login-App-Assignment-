@@ -29,13 +29,18 @@ void University::LoginSystem()
 		std::getline(std::cin, address);
 		//std::cin >> address;
 
+		std::cout << "Are you an studying in an Undergrad course, Masters course or for a Phd?" << std::endl;
+		std::getline(std::cin, courseType);
+		Check(courseType);
+		DefineStudentType(courseType);
+
 		std::cout << "Choose your Username!" << std::endl;
 		std::getline(std::cin, username);
 
 		std::cout << "Finally, set your password!" << std::endl;
 		std::getline(std::cin, password);
 
-		SaveStudentInfo(name, address, id, username, password);
+		SaveStudentInfo(name, address, id, username, password, courseType);
 
 		std::cout << "Thank you, you are now registered!" << std::endl;
 	}
@@ -58,6 +63,7 @@ void University::LoginSystem()
 			if (CheckPassword(loginPassword))
 			{
 				std::cout << "Login Successful! Welcome " << loginUsername << "!" << std::endl;
+				DefineStudentType(courseType);
 			}
 
 			else
@@ -76,6 +82,32 @@ void University::LoginSystem()
 	}
 }
 
+Student* University::DefineStudentType(const std::string& degree)
+{
+	if (degree == "UNDERGRAD" || degree == "UNDERGRADUATE")
+	{
+		student = new Undergrad();
+		return student;
+	}
+	
+	else if (degree == "MASTERS")
+	{
+		student = new Masters();
+		return student;
+	}
+
+	else if (degree == "PHD" || degree == "DOCTORATE")
+	{
+		student = new Phd();
+		return student;
+	}
+
+	else
+	{
+		std::cout << "Error, couldn't define student type!" << std::endl;
+		return 0;
+	}
+}
 
 void University::Lecture()
 {
@@ -85,34 +117,6 @@ void University::Lecture()
 
 	std::cin >> answerInt;
 
-	switch (Modules(answerInt))
-	{
-
-		case Modules::AdvancedCPPProgramming:
-
-			student.Learn(1);
-			break;
-
-		case Modules::GraphicsAndShaderProgramming:
-
-			student.Learn(2);
-			break;
-
-		case Modules::GameEngineDevelopment:
-
-			student.Learn(3);
-			break;
-
-		case Modules::AugmentedToyDevelopment:
-
-			student.Learn(4);
-			break;
-
-		default:
-
-			std::cout << "It seems you are not registered for that module, please choose a valid module!" << std::endl;
-			break;
-	}
 }
 
 void University::Check(std::string& answerCheck)
@@ -133,38 +137,43 @@ void University::Check(std::string& answerCheck)
 	}
 }
 
-void University::SaveStudentInfo(const std::string& name, const std::string& address, const std::string& id, const std::string& username, const std::string& password)
+void University::SaveStudentInfo(const std::string& name, const std::string& address, const std::string& id, const std::string& username, const std::string& password, const std::string& degree)
 {
-	auto save = "Name: " + name + "\n" + "Address: " + address + "\n" + "ID: " + id + "\n" + "Username: " + username + "\n" + "Password: " + password;
+	auto save = "Name: " + name + "\n" + "Address: " + address + "\n" + "ID: " + id + "\n" + "Username: " + username + "\n" + "Password: " + password + "\n" + "Degree Type: " + degree;
 	auto fileName = id + " - " + username;
 
-	const int maxLines = 5;
+	const int maxLines = 6;
 	for (int line = 0; line < maxLines; line++)
 	{
 		if (line == 0)
 		{
 			//Set Student variable in the student class.
-			student.SetStudentVars(name, line);
+			student->SetStudentVars(name, line);
 		}
 
 		else if (line == 1)
 		{
-			student.SetStudentVars(address, line);
+			student->SetStudentVars(address, line);
 		}
 
 		else if (line == 2)
 		{
-			student.SetStudentVars(id, line);
+			student->SetStudentVars(id, line);
 		}
 
 		else if (line == 3)
 		{
-			student.SetStudentVars(username, line);
+			student->SetStudentVars(username, line);
 		}
 
 		else if (line == 4)
 		{
-			student.SetStudentVars(password, line);
+			student->SetStudentVars(password, line);
+		}
+
+		else if (line == 5)
+		{
+			student->SetStudentVars(degree, line);
 		}
 
 		else
@@ -197,7 +206,7 @@ void University::LoadStudentInfo(const std::string& userID, const std::string& u
 
 	else
 	{
-		const int maxLines = 5;
+		const int maxLines = 6;
 		for (int line = 0; line < maxLines; line++)
 		{
 			std::getline(saveFile, output);
@@ -228,6 +237,11 @@ void University::LoadStudentInfo(const std::string& userID, const std::string& u
 				SetVar(password, 10, line);
 			}
 
+			else if (line == 5)
+			{
+				SetVar(courseType, 10, line);
+			}
+
 			else
 			{
 				std::cout << "Error! Forloop is not working!" << std::endl;
@@ -242,7 +256,7 @@ void University::LoadStudentInfo(const std::string& userID, const std::string& u
 void University::SetVar(std::string& var, int readFrom, int line)
 {
 	var = output.substr(readFrom);
-	student.SetStudentVars(var, line);
+	student->SetStudentVars(var, line);
 }
 
 bool University::CheckID(const std::string& checkID)
@@ -260,7 +274,8 @@ bool University::CheckPassword(const std::string& checkPassword)
 	return (checkPassword == password);
 }
 
-Student University::GetStudent()
+
+Student* University::GetStudent()
 {
 	return student;
 }

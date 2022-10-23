@@ -1,0 +1,6 @@
+Name: alex
+Address: 75
+ID: mango
+Username: username
+Password: password
+Degree Type: PHD

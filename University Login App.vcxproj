@@ -46,25 +46,25 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Win-x64|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Win-x86|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Win-x64|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -84,29 +84,29 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Win-x86|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\Build\bin\University Login App\Release\Win-x86\</OutDir>
-    <IntDir>..\Build\obj\University Login App\Release\Win-x86\</IntDir>
+    <OutDir>Build\bin\University Login App\Release\Win-x86\</OutDir>
+    <IntDir>Build\obj\University Login App\Release\Win-x86\</IntDir>
     <TargetName>University Login App</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Win-x64|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>..\Build\bin\University Login App\Release\Win-x64\</OutDir>
-    <IntDir>..\Build\obj\University Login App\Release\Win-x64\</IntDir>
+    <OutDir>Build\bin\University Login App\Release\Win-x64\</OutDir>
+    <IntDir>Build\obj\University Login App\Release\Win-x64\</IntDir>
     <TargetName>University Login App</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Win-x86|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\Build\bin\University Login App\Debug\Win-x86\</OutDir>
-    <IntDir>..\Build\obj\University Login App\Debug\Win-x86\</IntDir>
+    <OutDir>Build\bin\University Login App\Debug\Win-x86\</OutDir>
+    <IntDir>Build\obj\University Login App\Debug\Win-x86\</IntDir>
     <TargetName>University Login App</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Win-x64|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\Build\bin\University Login App\Debug\Win-x64\</OutDir>
-    <IntDir>..\Build\obj\University Login App\Debug\Win-x64\</IntDir>
+    <OutDir>Build\bin\University Login App\Debug\Win-x64\</OutDir>
+    <IntDir>Build\obj\University Login App\Debug\Win-x64\</IntDir>
     <TargetName>University Login App</TargetName>
     <TargetExt>.exe</TargetExt>
   </PropertyGroup>
@@ -134,7 +134,7 @@
       <LargeAddressAware>true</LargeAddressAware>
     </Link>
     <BuildLog>
-      <Path>..\Build\obj\$(ProjectName)\Win-x86\Release\$(ProjectName).log</Path>
+      <Path>Build\obj\$(ProjectName)\Win-x86\Release\$(ProjectName).log</Path>
     </BuildLog>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Win-x64|x64'">
@@ -161,7 +161,7 @@
       <LargeAddressAware>true</LargeAddressAware>
     </Link>
     <BuildLog>
-      <Path>..\Build\obj\$(ProjectName)\Win-x64\Release\$(ProjectName).log</Path>
+      <Path>Build\obj\$(ProjectName)\Win-x64\Release\$(ProjectName).log</Path>
     </BuildLog>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Win-x86|Win32'">
@@ -183,7 +183,7 @@
       <LargeAddressAware>true</LargeAddressAware>
     </Link>
     <BuildLog>
-      <Path>..\Build\obj\$(ProjectName)\Win-x86\Debug\$(ProjectName).log</Path>
+      <Path>Build\obj\$(ProjectName)\Win-x86\Debug\$(ProjectName).log</Path>
     </BuildLog>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Win-x64|x64'">
@@ -205,7 +205,7 @@
       <LargeAddressAware>true</LargeAddressAware>
     </Link>
     <BuildLog>
-      <Path>..\Build\obj\$(ProjectName)\Win-x64\Debug\$(ProjectName).log</Path>
+      <Path>Build\obj\$(ProjectName)\Win-x64\Debug\$(ProjectName).log</Path>
     </BuildLog>
   </ItemDefinitionGroup>
   <ItemGroup>

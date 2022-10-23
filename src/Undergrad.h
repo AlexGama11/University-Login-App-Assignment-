@@ -11,7 +11,7 @@ public:
 protected:
 	enum class Modules
 	{
-		ComputerGamingHardwareArchitectures,
+		ComputerGamingHardwareArchitectures = 1,
 		GameDesignandDevelopment,
 		GameProgramming,
 		LogicandMathematicalTechniques

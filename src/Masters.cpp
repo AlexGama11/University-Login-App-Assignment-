@@ -6,21 +6,11 @@ void Masters::Learn(int moduleNumber)
 	{
 
 	case Modules::AdvancedCPPProgramming:
-		if (studentCredits[moduleNumber] < 10)
+		if (studentCredits.at(moduleNumber) < 30)
 		{
-			studentCredits[moduleNumber] = studentCredits[moduleNumber] + 0.5;
-			break;
-		}
-
-		else if (10 < studentCredits[moduleNumber] < 20)
-		{
-			studentCredits[moduleNumber]++;
-			break;
-		}
-
-		else if (20 < studentCredits[moduleNumber] < 30)
-		{
-			studentCredits[moduleNumber] = studentCredits[moduleNumber] + 2;
+			srand(static_cast<unsigned int>(time(0)));
+			randomNumber = rand() % 5 + 1;
+			studentCredits.at(moduleNumber) = studentCredits.at(moduleNumber) + randomNumber;
 			break;
 		}
 
@@ -30,24 +20,19 @@ void Masters::Learn(int moduleNumber)
 			break;
 		}
 
-		break;
+		else
+		{
+			std::cout << "Error, could not add credits!" << std::endl;
+			break;
+		}
 
 	case Modules::GraphicsAndShaderProgramming:
-		if (studentCredits[moduleNumber] < 10)
-		{
-			studentCredits[moduleNumber] = studentCredits[moduleNumber] + 0.5;
-			break;
-		}
 
-		else if (10 < studentCredits[moduleNumber] < 20)
+		if (studentCredits.at(moduleNumber) < 30)
 		{
-			studentCredits[moduleNumber]++;
-			break;
-		}
-
-		else if (20 < studentCredits[moduleNumber] < 30)
-		{
-			studentCredits[moduleNumber] = studentCredits[moduleNumber] + 2;
+			srand(static_cast<unsigned int>(time(0)));
+			randomNumber = rand() % 5 + 1;
+			studentCredits.at(moduleNumber) = studentCredits.at(moduleNumber) + randomNumber;
 			break;
 		}
 
@@ -57,24 +42,20 @@ void Masters::Learn(int moduleNumber)
 			break;
 		}
 
-		break;
+		else
+		{
+			std::cout << "Error, could not add credits!" << std::endl;
+			break;
+		}
+
 
 	case Modules::GameEngineDevelopment:
-		if (studentCredits[moduleNumber] < 10)
+		
+		if (studentCredits.at(moduleNumber) < 30)
 		{
-			studentCredits[moduleNumber] = studentCredits[moduleNumber] + 0.5;
-			break;
-		}
-
-		else if (10 < studentCredits[moduleNumber] < 20)
-		{
-			studentCredits[moduleNumber]++;
-			break;
-		}
-
-		else if (20 < studentCredits[moduleNumber] < 30)
-		{
-			studentCredits[moduleNumber] = studentCredits[moduleNumber] + 2;
+			srand(static_cast<unsigned int>(time(0)));
+			randomNumber = rand() % 5 + 1;
+			studentCredits.at(moduleNumber) = studentCredits.at(moduleNumber) + randomNumber;
 			break;
 		}
 
@@ -84,24 +65,20 @@ void Masters::Learn(int moduleNumber)
 			break;
 		}
 
-		break;
+		else
+		{
+			std::cout << "Error, could not add credits!" << std::endl;
+			break;
+		}
+
 
 	case Modules::AugmentedToyDevelopment:
-		if (studentCredits[moduleNumber] < 10)
+		
+		if (studentCredits.at(moduleNumber) < 30)
 		{
-			studentCredits[moduleNumber] = studentCredits[moduleNumber] + 0.5;
-			break;
-		}
-
-		else if (10 < studentCredits[moduleNumber] < 20)
-		{
-			studentCredits[moduleNumber]++;
-			break;
-		}
-
-		else if (20 < studentCredits[moduleNumber] < 30)
-		{
-			studentCredits[moduleNumber] = studentCredits[moduleNumber] + 2;
+			srand(static_cast<unsigned int>(time(0)));
+			randomNumber = rand() % 5 + 1;
+			studentCredits.at(moduleNumber) = studentCredits.at(moduleNumber) + randomNumber;
 			break;
 		}
 
@@ -111,7 +88,22 @@ void Masters::Learn(int moduleNumber)
 			break;
 		}
 
-		break;
+		else
+		{
+			std::cout << "Error, could not add credits!" << std::endl;
+			break;
+		}
+
 	}
 
 }
+
+void Masters::TotalCredits()
+{
+	std::cout << "Your Total Credits are:" << std::endl;
+	std::cout << "Advanced CPP Programming: " << studentCredits.at(5) << std::endl;
+	std::cout << "Graphics And Shader Programming: " << studentCredits.at(6) << std::endl;
+	std::cout << "Game Engine Development: " << studentCredits.at(7) << std::endl;
+	std::cout << "Augmented Toy Development: " << studentCredits.at(8) << std::endl;
+}
+

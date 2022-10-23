@@ -7,10 +7,12 @@ public:
 
 	virtual void Learn(int moduleNumber) override;
 
+	virtual void TotalCredits() override;
+
 protected:
 	enum class Modules
 	{
-		ArtificialIntelligence = 8,
+		ArtificialIntelligence = 9,
 		ArtificialIntelligenceforGames,
 		CreativeTechnologyProject,
 		NetworkingforGames,

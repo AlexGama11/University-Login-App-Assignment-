@@ -1,0 +1,6 @@
+Name: alex
+Address: flat 8
+ID: 8901
+Username: mango
+Password: man
+Degree Type: UNDERGRAD

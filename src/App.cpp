@@ -2,8 +2,7 @@
 
 void App::MainScreen()
 {
-	uni.GetStudent().UniStudent();
-
+	uni.GetStudent()->UniStudent();
 	std::cout << "\nWould you like to attend a Lecture or finish your school year?" << std::endl;
 	std::cin.clear();
 	std::cin >> appAnswer;
@@ -12,7 +11,9 @@ void App::MainScreen()
 
 	if (appAnswer == "ATTEND" || appAnswer == "LECTURE")
 	{
-		uni.Lecture();
+		uni.Lecture(uni.GetDegreeType());
+
+		std::cout << "\n" << std::endl;
 	}
 
 	else if (appAnswer == "FINISH" || appAnswer == "QUIT")
@@ -25,7 +26,7 @@ void App::MainScreen()
 		if (appAnswer == "Y" || appAnswer == "YES")
 		{
 			std::cout << "\n" << std::endl;
-			uni.GetStudent().TotalCredits();
+			uni.GetStudent()->TotalCredits();
 			Quit();
 		}
 

@@ -25,13 +25,22 @@ void University::LoginSystem()
 		std::getline(std::cin, id);
 
 		std::cout << "What's your Address?" << std::endl;
-		std::cin.ignore();
 		std::getline(std::cin, address);
 		//std::cin >> address;
 
 		std::cout << "Are you an studying in an Undergrad course, Masters course or for a Phd?" << std::endl;
-		std::getline(std::cin, courseType);
+		std::cin >> courseType;
 		Check(courseType);
+
+		while (courseType != "UNDERGRAD" && courseType != "UNDERGRADUATE" && courseType != "MASTERS" && courseType != "PHD" && courseType != "DOCTORATE")
+		{
+			std::cout << "Option not recognized, please retry..." << std::endl;
+			std::cin.clear();
+			std::cin.ignore(256, '\n');
+			std::cin >> courseType;
+			Check(courseType);
+		}
+	
 		DefineStudentType(courseType);
 
 		std::cout << "Choose your Username!" << std::endl;
@@ -53,9 +62,23 @@ void University::LoginSystem()
 		std::cout << "What's your Username?" << std::endl;
 		std::cin >> loginUsername;
 
+		std::cout << "What's your Degree Level?" << std::endl;
+		std::cin >> courseType;
+		Check(courseType);
+
+		while (courseType != "UNDERGRAD" && courseType != "UNDERGRADUATE" && courseType != "MASTERS" && courseType != "PHD" && courseType != "DOCTORATE")
+		{
+			std::cout << "Option not recognized, please retry..." << std::endl;
+			std::cin.clear();
+			std::cin >> courseType;
+			Check(courseType);
+		}
+
+		DefineStudentType(courseType);
+
 		LoadStudentInfo(loginID, loginUsername);
 
-		if (CheckID(loginID) && CheckUsername(loginUsername))
+		if (CheckID(loginID) && CheckUsername(loginUsername) && CheckDegreeType(courseType))
 		{
 			std::cout << "Please, input your password!" << std::endl;
 			std::cin >> loginPassword;
@@ -63,7 +86,6 @@ void University::LoginSystem()
 			if (CheckPassword(loginPassword))
 			{
 				std::cout << "Login Successful! Welcome " << loginUsername << "!" << std::endl;
-				DefineStudentType(courseType);
 			}
 
 			else
@@ -109,13 +131,85 @@ Student* University::DefineStudentType(const std::string& degree)
 	}
 }
 
-void University::Lecture()
+void University::Lecture(const std::string& degree)
 {
-	std::cout << "Choose which module to learn from!" << std::endl;
+	if (degree == "UNDERGRAD" || degree == "UNDERGRADUATE")
+	{
+		std::cout << "Choose which module to learn from!" << std::endl;
 
-	std::cout << "AdvancedCPPProgramming = 1, GraphicsAndShaderProgramming = 2, GameEngineDevelopment = 3, AugmentedToyDevelopment = 4" << std::endl;
+		std::cout << "Computer Gaming Hardware Architectures = 1;\nGame Design and Development = 2;\nGame Programming = 3;\nLogic and Mathematical Techniques = 4." << std::endl;
 
-	std::cin >> answerInt;
+		std::cin >> answerInt;
+
+		if (answerInt > 4 || answerInt < 0)
+		{
+			std::cout << "Please write a valid answer!" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(256, '\n');
+			std::cin >> answerInt;
+		}
+
+		else
+		{
+			student->Learn(answerInt);
+
+			student->TotalCredits();
+		}
+		
+	}
+
+	else if (degree == "MASTERS")
+	{
+		std::cout << "Choose which module to learn from!" << std::endl;
+
+		std::cout << "Advanced CPP Programming = 5;\nGraphics And Shader Programming = 6;\nGame Engine Development = 7;\nAugmented Toy Development = 8." << std::endl;
+
+		std::cin >> answerInt;
+
+		if (answerInt > 8 || answerInt < 5)
+		{
+			std::cout << "Please write a valid answer!" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(256, '\n');
+			std::cin >> answerInt;
+		}
+
+		else
+		{
+			student->Learn(answerInt);
+			student->TotalCredits();
+		}
+	}
+
+	else if (degree == "PHD" || degree == "DOCTORATE")
+	{
+		std::cout << "Choose which module to learn from!" << std::endl;
+
+		std::cout << "Artificial Intelligence = 9;\nArtificial Intelligence for Games = 10;\nCreative Technology Project = 11;\nNetworking for Games = 12;\nPrototype Development = 13;\nResearch Related Learning = 14;\nWork Related Learning for Games and Animation = 15." << std::endl;
+
+		std::cin >> answerInt;
+
+		if (answerInt < 9 || answerInt > 15)
+		{
+			std::cout << "Please write a valid answer!" << std::endl;
+			std::cin.clear();
+			std::cin.ignore(256, '\n');
+			std::cin >> answerInt;
+		}
+
+		else
+		{
+			student->Learn(answerInt);
+			student->TotalCredits();
+		}
+	}
+
+	else
+	{
+		std::cout << "Error, couldn't get your grades!" << std::endl;
+	}
+
+	student->Advance(courseType);
 
 }
 
@@ -182,7 +276,7 @@ void University::SaveStudentInfo(const std::string& name, const std::string& add
 		}
 	}
 
-	std::string filePath = "../SavedInfo/" + fileName + ".txt";
+	std::string filePath = "./SavedInfo/" + fileName + ".txt";
 
 	std::ofstream saveFile(filePath);
 
@@ -195,7 +289,7 @@ void University::LoadStudentInfo(const std::string& userID, const std::string& u
 {
 	std::string fileName = userID + " - " + userUsername;
 
-	std::string filePath = "../SavedInfo/" + fileName + ".txt";
+	std::string filePath = "./SavedInfo/" + fileName + ".txt";
 
 	std::ifstream saveFile(filePath);
 
@@ -239,7 +333,7 @@ void University::LoadStudentInfo(const std::string& userID, const std::string& u
 
 			else if (line == 5)
 			{
-				SetVar(courseType, 10, line);
+				SetVar(courseType, 13, line);
 			}
 
 			else
@@ -274,8 +368,17 @@ bool University::CheckPassword(const std::string& checkPassword)
 	return (checkPassword == password);
 }
 
+bool University::CheckDegreeType(const std::string& checkDegree)
+{
+	return (checkDegree == courseType);
+}
 
 Student* University::GetStudent()
 {
 	return student;
+}
+
+std::string University::GetDegreeType()
+{
+	return courseType;
 }

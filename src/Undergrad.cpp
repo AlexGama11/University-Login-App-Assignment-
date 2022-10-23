@@ -6,21 +6,12 @@ void Undergrad::Learn(int moduleNumber)
 	{
 
 	case Modules::ComputerGamingHardwareArchitectures:
-		if (studentCredits[moduleNumber] < 10)
+		
+		if (studentCredits.at(moduleNumber) < 30)
 		{
-			studentCredits[moduleNumber] = studentCredits[moduleNumber] + 0.5;
-			break;
-		}
-
-		else if (10 < studentCredits[moduleNumber] < 20)
-		{
-			studentCredits[moduleNumber]++;
-			break;
-		}
-
-		else if (20 < studentCredits[moduleNumber] < 30)
-		{
-			studentCredits[moduleNumber] = studentCredits[moduleNumber] + 2;
+			srand(static_cast<unsigned int>(time(0)));
+			randomNumber = rand() % 5 + 1;
+			studentCredits.at(moduleNumber) = studentCredits.at(moduleNumber) + randomNumber;
 			break;
 		}
 
@@ -30,24 +21,20 @@ void Undergrad::Learn(int moduleNumber)
 			break;
 		}
 
-		break;
+		else
+		{
+			std::cout << "Error, could not add credits!" << std::endl;
+			break;
+		}
+
 
 	case Modules::GameDesignandDevelopment:
-		if (studentCredits[moduleNumber] < 10)
+		
+		if (studentCredits.at(moduleNumber) < 30)
 		{
-			studentCredits[moduleNumber] = studentCredits[moduleNumber] + 0.5;
-			break;
-		}
-
-		else if (10 < studentCredits[moduleNumber] < 20)
-		{
-			studentCredits[moduleNumber]++;
-			break;
-		}
-
-		else if (20 < studentCredits[moduleNumber] < 30)
-		{
-			studentCredits[moduleNumber] = studentCredits[moduleNumber] + 2;
+			srand(static_cast<unsigned int>(time(0)));
+			randomNumber = rand() % 5 + 1;
+			studentCredits.at(moduleNumber) = studentCredits.at(moduleNumber) + randomNumber;
 			break;
 		}
 
@@ -57,24 +44,20 @@ void Undergrad::Learn(int moduleNumber)
 			break;
 		}
 
-		break;
+		else
+		{
+			std::cout << "Error, could not add credits!" << std::endl;
+			break;
+		}
+
 
 	case Modules::GameProgramming:
-		if (studentCredits[moduleNumber] < 10)
+		
+		if (studentCredits.at(moduleNumber) < 30)
 		{
-			studentCredits[moduleNumber] = studentCredits[moduleNumber] + 0.5;
-			break;
-		}
-
-		else if (10 < studentCredits[moduleNumber] < 20)
-		{
-			studentCredits[moduleNumber]++;
-			break;
-		}
-
-		else if (20 < studentCredits[moduleNumber] < 30)
-		{
-			studentCredits[moduleNumber] = studentCredits[moduleNumber] + 2;
+			srand(static_cast<unsigned int>(time(0)));
+			randomNumber = rand() % 5 + 1;
+			studentCredits.at(moduleNumber) = studentCredits.at(moduleNumber) + randomNumber;
 			break;
 		}
 
@@ -84,24 +67,20 @@ void Undergrad::Learn(int moduleNumber)
 			break;
 		}
 
-		break;
+		else
+		{
+			std::cout << "Error, could not add credits!" << std::endl;
+			break;
+		}
+
 
 	case Modules::LogicandMathematicalTechniques:
-		if (studentCredits[moduleNumber] < 10)
+	
+		if (studentCredits.at(moduleNumber) < 30)
 		{
-			studentCredits[moduleNumber] = studentCredits[moduleNumber] + 0.5;
-			break;
-		}
-
-		else if (10 < studentCredits[moduleNumber] < 20)
-		{
-			studentCredits[moduleNumber]++;
-			break;
-		}
-
-		else if (20 < studentCredits[moduleNumber] < 30)
-		{
-			studentCredits[moduleNumber] = studentCredits[moduleNumber] + 2;
+			srand(static_cast<unsigned int>(time(0)));
+			randomNumber = rand() % 5 + 1;
+			studentCredits.at(moduleNumber) = studentCredits.at(moduleNumber) + randomNumber;
 			break;
 		}
 
@@ -111,7 +90,12 @@ void Undergrad::Learn(int moduleNumber)
 			break;
 		}
 
-		break;
+		else
+		{
+			std::cout << "Error, could not add credits!" << std::endl;
+			break;
+		}
+
 	}
 
 }
@@ -119,8 +103,8 @@ void Undergrad::Learn(int moduleNumber)
 void Undergrad::TotalCredits()
 {
 	std::cout << "Your Total Credits are:" << std::endl;
-	std::cout << "Computer GamingHardware Architectures: " << studentCredits[0] << std::endl;
-	std::cout << "GameDesign and Development:" << studentCredits[1] << std::endl;
-	std::cout << "Game Programming: " << studentCredits[2] << std::endl;
-	std::cout << "Logic and Mathematical Techniques: " << studentCredits[3] << std::endl;
+	std::cout << "Computer Gaming Hardware Architectures: " << studentCredits.at(1) << std::endl;
+	std::cout << "Game Design and Development: " << studentCredits.at(2) << std::endl;
+	std::cout << "Game Programming: " << studentCredits.at(3) << std::endl;
+	std::cout << "Logic and Mathematical Techniques: " << studentCredits.at(4) << std::endl;
 }

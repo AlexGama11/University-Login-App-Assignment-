@@ -1,9 +1,9 @@
 workspace "Uni Login App"
 	startproject "UniLoginApp"
 
-	targetdir "../Build/bin/%{prj.name}/%{cfg.buildcfg}/%{cfg.platform}/"
-	objdir "../Build/obj/%{prj.name}/%{cfg.buildcfg}/%{cfg.platform}/"
-	buildlog "../Build/obj/%{prj.name}/%{cfg.platform}/%{cfg.buildcfg}/%{prj.name}.log"
+	targetdir "./Build/bin/%{prj.name}/%{cfg.buildcfg}/%{cfg.platform}/"
+	objdir "./Build/obj/%{prj.name}/%{cfg.buildcfg}/%{cfg.platform}/"
+	buildlog "./Build/obj/%{prj.name}/%{cfg.platform}/%{cfg.buildcfg}/%{prj.name}.log"
 
 	largeaddressaware "on"
 	editandcontinue "off"

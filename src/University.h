@@ -22,6 +22,7 @@ private:
 
 	std::string answer;
 	int answerInt;
+	bool courseCheck{ false };
 
 	std::string output;
 
@@ -35,7 +36,7 @@ public:
 	
 	Student* DefineStudentType(const std::string& degree);
 
-	void Lecture();
+	void Lecture(const std::string& degree);
 
 	void Check(std::string& answerCheck);
 
@@ -51,7 +52,11 @@ public:
 
 	bool CheckPassword(const std::string& checkPassword);
 
+	bool CheckDegreeType(const std::string& checkDegree);
+
 	Student* GetStudent();
+
+	std::string GetDegreeType();
 
 };
 

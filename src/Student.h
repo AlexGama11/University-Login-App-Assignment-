@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include<cstdlib>
+#include <ctime>
 
 class Student
 {
@@ -10,7 +12,12 @@ protected:
 
 	// Goes by module order, to find which credit is for which module do modulenumber - 1.
 	int totalModules;
-	std::vector<float> studentCredits[14];
+
+	std::vector<float> studentCredits = std::vector<float> (14);
+
+	int randomNumber;
+
+	int totalCredits;
 
 	enum class LineNumber
 	{
@@ -20,6 +27,13 @@ protected:
 		FourthLine,
 		FifthLine,
 		SixthLine
+	};
+
+	enum class MaxCredits
+	{
+		FirstYear = 120,
+		SecondYear = 120,
+		ThirdYear = 210
 	};
 
 	struct StudentInfo
@@ -43,5 +57,7 @@ public:
 	void SetStudentVars(const std::string& var, int whatLine);
 
 	virtual void TotalCredits() = 0;
+
+	std::string Advance(std::string& degree);
 };
 

@@ -1,0 +1,6 @@
+Name: alex
+Address: ly
+ID: oppo
+Username: hi
+Password: mango
+Degree Type: UNDERGRAD

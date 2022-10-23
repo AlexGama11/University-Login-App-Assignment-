@@ -63,5 +63,62 @@ void Student::SetStudentVars(const std::string& var, int whatLine)
 
 void Student::TotalCredits()
 {
-	
+
+}
+
+std::string Student::Advance(std::string& degree)
+{
+	if (degree == "UNDERGRAD" || degree == "UNDERGRADUATE")
+	{
+		for (int i = 1; i <= 4; i++)
+		{
+			totalCredits = totalCredits + studentCredits.at(i);
+		}
+		
+		if (totalCredits == 120)
+		{
+			degree = "Masters";
+			return degree;
+		}
+		return degree;
+	}
+
+	else if (degree == "MASTERS")
+	{
+		for (int i = 1; i <= 4; i++)
+		{
+			totalCredits = totalCredits + studentCredits.at(i);
+		}
+
+		if (totalCredits == 120)
+		{
+			degree = "Phd";
+			return degree;
+		}
+
+		return degree;
+	}
+
+	else if (degree == "PHD" || degree == "DOCTORATE")
+	{
+		for (int i = 1; i <= 6; i++)
+		{
+			totalCredits = totalCredits + studentCredits.at(i);
+		}
+
+		if (totalCredits == 210)
+		{
+			degree = "Graduated!";
+			return degree;
+		}
+
+		return degree;
+	}
+
+	else
+	{
+		std::cout << "Error, couldn't get your grades!" << std::endl;
+	}
+
+	return degree;
 }

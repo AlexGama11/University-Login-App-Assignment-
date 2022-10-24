@@ -13,7 +13,7 @@ protected:
 	// Goes by module order, to find which credit is for which module do modulenumber - 1.
 	int totalModules;
 
-	std::vector<float> studentCredits = std::vector<float> (14);
+	std::vector<float> studentCredits = std::vector<float> (15, 0);
 
 	int randomNumber;
 
